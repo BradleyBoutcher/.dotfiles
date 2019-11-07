@@ -1,0 +1,25 @@
+echo "Git config"
+git config --global user.name "Bradley Boutcher"
+git config --global user.email btboutcher@icloud.com
+git config --global credential.helper osxkeychain
+git config --global core.editor "nano"
+
+echo "Creating an SSH key for you..."
+mkdir ~/.ssh
+ssh-keygen -t rsa -C "btboutcher@icloud.com" -f ~/.ssh/id_rsa
+
+echo "Adding ssh-key to ssh-agent"
+"Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+ssh-add -K ~/.ssh/id_rsa
+
+echo "Please add this public key to Github (Copied to clipboard) \n"
+pbcopy < ~/.ssh/id_rsa.pub
+read -p "Press [Enter] key after this..."
+
+echo "Installing brew git utilities..."
+brew install git-extras
+brew install legit
+brew install git-flow
