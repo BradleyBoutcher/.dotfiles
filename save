@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. generate 
+
+save_brew_packages
+
+save_zshrc
+
+save_aliases
+
+save_functions
+
+save_go_env
