@@ -1,10 +1,13 @@
-
-plugins=($(cat .zsh_plugins)) 
+source locations 
+ 
+source $ALIASES 
+source $ENVS
+source $FUNCTIONS 
+source $ENV_FILE_GO
 
 source $ZSH/oh-my-zsh.sh
-source .aliases 
-source .env
-source .functions
+
+plugins=($(cat .zsh_plugins)) 
 
 # Go development
 test -d "${GOPATH}" || mkdir "${GOPATH}"

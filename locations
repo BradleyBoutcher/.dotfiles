@@ -1,0 +1,17 @@
+#!/bin/bash 
+
+# Top-level locations
+LISTS=./lists
+SOURCABLES=./sourcables 
+SETUP=./setup
+
+# Lists
+BREWS="${LISTS}/.brew"
+CASKS="${LISTS}/.brew_casks"
+ZSH_PLGUINS="${LISTS}/.zsh_plugins"
+
+# 'Sourcables'
+ALIASES="${SOURCABLES}/.aliases"
+ENVS="${SOURCABLES}/.env"
+FUNCTIONS="${SOURCABLES}/.functions"
+ENV_FILE_GO=""${SOURCABLES}/.go_env"

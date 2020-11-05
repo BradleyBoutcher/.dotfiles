@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. generate 
+. save_util 
 
 save_brew_packages
 
