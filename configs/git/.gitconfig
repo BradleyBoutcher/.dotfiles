@@ -1,0 +1,17 @@
+[user]
+	name = Bradley Boutcher
+	email = btboutcher@icloud.com
+	signingkey = 95F7C229818F2782
+[credential]
+	helper = osxkeychain
+[core]
+	hooksPath = ~/git-hooks
+	editor = nano
+	excludesfile = ~/.gitignore_global
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gpg]
+	program = gpg

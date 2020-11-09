@@ -2,16 +2,20 @@
 
 . util
 
-function save_oh_my_zsh() {
-
-}
-
 function save_brew_packages() {
     shout "Saving Brew packages to '.brew' file"
 
     brew list --formula > .brew 
 
     fin
+}
+
+function save_git_config() {
+    cp $HOME/.gitconfig configs/git/.gitconfig
+    cp $HOME/.gitignore_global configs/git/.gitignore_global
+    cp $HOME/.gitleaks.toml  configs/git/.gitleaks.toml
+
+    cp -r $HOME/git-hooks configs/git/git-hooks
 }
 
 function download_brew_packages() {
