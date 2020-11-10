@@ -1,17 +1,40 @@
 #!/bin/bash 
 
-# Top-level locations
-LISTS=./lists
-SOURCABLES=./sourcables 
-SETUP=./setup
+# These locations are all relative to the location
+# of this file. To use these locations in your $HOME,
+# copy this file there.
 
-# Lists
+# Storage directories 
+PROJECTS="$HOME/Workspace/Projects"
+
+# Top-level directories
+LISTS="./lists"
+SOURCABLES="./sourcables" 
+SETUP="./setup"
+RCS="./rcs"
+SSH_DIR="./ssh"
+CONFIGS="./configs"
+
+# config storage folders
+GIT_CONFIGS="${CONFIGS}/git"
+SSH_CONFIGS="${CONFIGS}/ssh"
+
+# List files
 BREWS="${LISTS}/.brew"
 CASKS="${LISTS}/.brew_casks"
 ZSH_PLGUINS="${LISTS}/.zsh_plugins"
 
-# 'Sourcables'
+# 'Sourcable' files 
+# i.e. environment variables, aliases, functions, etc.
 ALIASES="${SOURCABLES}/.aliases"
 ENVS="${SOURCABLES}/.env"
 FUNCTIONS="${SOURCABLES}/.functions"
-ENV_FILE_GO=""${SOURCABLES}/.go_env"
+ENV_FILE_GO="${SOURCABLES}/.go_env"
+
+# RC files
+# i.e. .zshrc, .conjurrc, etc.
+ZSHRC="${RCS}/.zshrc"
+CONJURRC="${RCS}/.conjurrc"
+NETRC="${RCS}/.netrc"
+BASHRC"${RCS}/.bashrc"
+BASH_PROFILE="${RCS}/.bash_profile"

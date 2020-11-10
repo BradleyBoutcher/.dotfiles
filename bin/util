@@ -1,0 +1,23 @@
+#!/bin/bash 
+
+. ./locations
+
+function shout() {
+    printf "
+    ---------------
+    ${1}
+    ---------------
+    "
+}
+
+function fin() {
+    shout "Done!"
+}
+
+function dir_check() {
+    if [ -d "${1}" ]; then
+        return 
+    else 
+        mkdir -p "${1}"
+    fi
+}

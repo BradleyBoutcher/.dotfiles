@@ -1,0 +1,16 @@
+#!/bin/bash 
+
+. ./util
+
+check_dir $LISTS 
+check_dir $SOURCABLES
+check_dir $RCS
+
+# Install XCode Utils
+shout "Installing xcode utilities"
+sudo xcode-select --install
+
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+read -p "Press [Enter] key after verifying `brew doctor` works in another terminal..."
