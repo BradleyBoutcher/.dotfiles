@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-. ./bin/util
+. ./util
 
 function save_brew_packages() {
     shout "Saving Brew packages to '.brew' file"

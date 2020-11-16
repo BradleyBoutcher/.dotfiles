@@ -1,6 +1,6 @@
 source locations 
  
-# Source the files 
+# Source all the files 
 source $ALIASES 
 source $ENVS
 source $FUNCTIONS 

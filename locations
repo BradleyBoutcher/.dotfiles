@@ -7,7 +7,7 @@
 # Storage directories 
 PROJECTS="$HOME/Workspace/Projects"
 
-# Top-level directories
+# Top-level directory prefixes
 LISTS="./lists"
 SOURCABLES="./sourcables" 
 SETUP="./setup"

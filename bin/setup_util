@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./bin/util
+. ./util
 
 function copy_files() {
     read -p "Warning: copying these configuration files will OVERRIDE existing files in your top
@@ -20,6 +20,28 @@ function copy_files() {
 
     shout "Copying .rc files..."
     cp ${RCS}/. ${HOME}
+
+    fin
+}
+
+function install_summon() {
+    shout "Installing and setting up summon (if not present already)..."
+    brew tap cyberark/tools
+    brew list summon || brew install summon
+
+    shout "Installing keyring to use with summon..."
+    pip install keyring
+    git clone git@github.com:cyberark/summon-keyring.git
+
+    pushd summon-keyring
+        mkdir -p /usr/local/lib/summon
+        ln -s "$PWD/ring.py" /usr/local/lib/summon/keyring.py
+    popd
+
+    shout "Installing summon-conjur..."
+    brew install summon-conjur
+
+    fin
 }
 
 function install_ruby() {
@@ -33,6 +55,8 @@ function install_ruby() {
     shout "Installing bundler..."
     gem install bundler
     echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
+
+    fin
 }
 
 function install_docker() {
@@ -45,6 +69,8 @@ function install_docker() {
     shout "Setting up default virtualbox machine..."
     docker-machine create --driver virtualbox default
     docker-machine env default
+
+    fin
 }
 
 function install_git() {
@@ -53,9 +79,9 @@ function install_git() {
 
     shout "Creating an SSH key for you..."
     # Create ssh dir if it doesn't already exist
-    check_dir "$SSH_DIR"
+    check_dir "$HOME/$SSH_DIR"
     # Generate key
-    ssh-keygen -t rsa -C "btboutcher@icloud.com" -f "$SSH_DIR"/id_rsa
+    ssh-keygen -t rsa -C "btboutcher@icloud.com" -f "$HOME/$SSH_DIR/id_rsa"
 
     shout "Adding ssh-key to ssh-agent"
     # Add an .ssh config if it doesn't already exist
@@ -66,11 +92,11 @@ function install_git() {
             IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
     fi
     # Add key
-    ssh-add -K "$SSH_DIR"/id_rsa
+    ssh-add -K "$HOME/$SSH_DIR/id_rsa"
 
     # Give the user a chance to store the key in Github
     shout "Please add this public key to Github (Copied to clipboard) \n"
-    pbcopy < "$SSH_DIR"/id_rsa.pub
+    pbcopy < "$HOME/$SSH_DIR/id_rsa.pub"
     read -p "Press [Enter] key after this..."
 
     fin
