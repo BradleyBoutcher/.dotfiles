@@ -1,28 +1,29 @@
 #!/bin/bash 
 
 # These locations are all relative to the location
-# of this file. To use these locations in your $HOME,
-# copy this file there.
+# of $HOME.
 
 # Storage directories 
 PROJECTS="$HOME/Workspace/Projects"
+ZSH="$HOME/.oh-my-zsh"
+DOTFILES="$HOME/.dotfiles"
 
 # Top-level directory prefixes
-LISTS="./lists"
-SOURCABLES="./sourcables" 
-SETUP="./setup"
-RCS="./rcs"
-SSH_DIR="./ssh"
-CONFIGS="./configs"
+LISTS="$DOTFILES/lists"
+SOURCABLES="$DOTFILES/sourcables" 
+RCS="$DOTFILES/rcs"
+SSH_DIR="$HOME/.ssh"
+CONFIGS="$HOME/configs"
 
 # config storage folders
-GIT_CONFIGS="${CONFIGS}/git"
-SSH_CONFIGS="${CONFIGS}/ssh"
+GIT_CONFIGS="${CONFIGS}/.git"
+SSH_CONFIGS="${CONFIGS}/.ssh"
 
 # List files
 BREWS="${LISTS}/.brew"
 CASKS="${LISTS}/.brew_casks"
-ZSH_PLGUINS="${LISTS}/.zsh_plugins"
+ZSH_PLUGINS="${LISTS}/.zsh_plugins"
+LOCATIONS="${LISTS}/.locations"
 
 # 'Sourcable' files 
 # i.e. environment variables, aliases, functions, etc.
@@ -36,5 +37,4 @@ ENV_FILE_GO="${SOURCABLES}/.go_env"
 ZSHRC="${RCS}/.zshrc"
 CONJURRC="${RCS}/.conjurrc"
 NETRC="${RCS}/.netrc"
-BASHRC"${RCS}/.bashrc"
 BASH_PROFILE="${RCS}/.bash_profile"

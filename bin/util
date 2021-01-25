@@ -1,7 +1,5 @@
 #!/bin/bash 
 
-. ./locations
-
 function shout() {
     printf "
     ---------------
