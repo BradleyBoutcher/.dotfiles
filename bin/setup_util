@@ -1,0 +1,178 @@
+#!/bin/bash
+
+. ./util
+
+function copy_files() {
+    read -p "Warning: copying these configuration files will OVERRIDE existing files in your top
+    level directory. Press [ENTER] if you want to proceed, otherwise press [CTL]+[C]."
+
+    shout "Copying git configurations..."
+    cp ${GIT_CONFIGS}/. ${HOME} 
+
+    shout "Copying ssh configurations..."
+    cp ${SSH_CONFIGS}/. ${HOME}/.ssh/ 
+
+    shout "Copying lists..."
+    cp ${LISTS} ${HOME}
+
+    shout "Copying 'sourcables'..." 
+    cp ${SOURCABLES} ${HOME}
+
+    shout "Copying .rc files..."
+    cp ${RCS}/. ${HOME}
+
+    fin
+}
+
+function install_summon() {
+    shout "Installing and setting up summon (if not present already)..."
+    brew tap cyberark/tools
+    brew list summon || brew install summon
+
+    shout "Installing keyring to use with summon..."
+    pip install keyring
+    git clone git@github.com:cyberark/summon-keyring.git
+
+    pushd summon-keyring
+        mkdir -p /usr/local/lib/summon
+        ln -s "$PWD/ring.py" /usr/local/lib/summon/keyring.py
+    popd
+
+    shout "Installing summon-conjur..."
+    brew install summon-conjur
+
+    fin
+}
+
+function install_ruby() {
+    shout "Installing and setting up Ruby (if not present already)..."
+    brew list rbenv ruby-build rbenv-default-gems rbenv-gemset \
+        || brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
+
+    # Save time by not including documentation locally
+    sudo echo 'gem: --no-document' >> ~/.gemrc
+
+    shout "Installing bundler..."
+    gem install bundler
+    echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
+
+    fin
+}
+
+function install_docker() {
+    shout "Installing docker (if not present already)..."
+    brew list docker docker-machine || brew install docker docker-machine
+
+    shout "Installing virtualbox..."
+    brew list --cask virtualbox || brew cask install virtualbox
+
+    shout "Setting up default virtualbox machine..."
+    docker-machine create --driver virtualbox default
+    docker-machine env default
+
+    fin
+}
+
+function install_git() {
+    shout "Installing Git (if not present already)..."
+    brew list git || brew install git
+
+    shout "Creating an SSH key for you..."
+    # Create ssh dir if it doesn't already exist
+    check_dir "$HOME/$SSH_DIR"
+    # Generate key
+    ssh-keygen -t rsa -C "btboutcher@icloud.com" -f "$HOME/$SSH_DIR/id_rsa"
+
+    shout "Adding ssh-key to ssh-agent"
+    # Add an .ssh config if it doesn't already exist
+    if [[ ! -f "${1}" ]]; then 
+        "Host *
+            AddKeysToAgent yes
+            UseKeychain yes
+            IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+    fi
+    # Add key
+    ssh-add -K "$HOME/$SSH_DIR/id_rsa"
+
+    # Give the user a chance to store the key in Github
+    shout "Please add this public key to Github (Copied to clipboard) \n"
+    pbcopy < "$HOME/$SSH_DIR/id_rsa.pub"
+    read -p "Press [Enter] key after this..."
+
+    fin
+}
+
+function download_git_repos() {
+    shout "Downloading Github repos (this may take a while)..."
+    check_dir "$PROJECTS"
+
+    brew list jq || brew install jq
+
+    pushd "$PROJECTS"
+    # Install summon if we haven't already
+    brew list summon || brew install summon 
+    # Clone git repos for Cyberark
+    curl -s https://$GIT_TOKEN:@api.github.com/orgs/cyberark/repos\?per_page\=200 \
+        | jq ".[].ssh_url" \
+        | xargs -n 1 git clone --recursive
+    popd
+
+    fin
+}
+
+function download_brew_packages() {
+    # Check for Homebrew,
+    # Install if we don't have it
+    if test ! $(which brew); then
+        shout "Installing homebrew..."
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+
+    # Update homebrew recipes
+    shout "Updating homebrew..."
+    brew update
+
+    # Download packages
+    shout "Downloading Brew packages from `brew` file"
+
+    brew tap cyberark/tools
+
+    brew install $(cat $BREWS) 
+
+    shout "Cleaning up brew"
+    brew cleanup
+
+    fin
+}
+
+function install_oh_my_zsh() {
+    shout "Installing Oh My ZSH..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+    shout "Downloading Zsh plugins..."
+    pushd ~/.oh-my-zsh/custom/plugins
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git
+        git clone https://github.com/zsh-users/zsh-completions.git
+        git clone https://github.com/zsh-users/zsh-history-substring-search.git
+    popd 
+
+    # Manually change shell
+    chsh -s $(which zsh)
+
+    fin
+}
+
+
+function setup_py_env() {
+    shout "Setting up Python (if not present already)..."
+
+    brew list python || brew install python
+    brew list pyenv || brew install pyenv
+
+    shout "Installing pip and setuptools"
+    pip3 install --upgrade setuptools
+    pip3 install --upgrade pip
+
+    echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+}

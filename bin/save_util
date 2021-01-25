@@ -1,0 +1,77 @@
+#!/bin/bash 
+
+source util
+source .locations 
+
+function save_brew_packages() {
+    shout "Saving Brew packages to '.brew' file"
+
+    brew list --formula > $LISTS/.brew 
+
+    fin
+}
+
+function save_cask_packages() {
+    shout "Saving Brew Cask packages to '.brew_cask' file"
+
+    brew list --formula > $LISTS/.brew_casks
+
+    fin
+}
+
+function save_ssh_config() {
+    # Machine location for ssh config directory
+    SSH_DIR="$HOME/.ssh"
+
+    dir_check ${SSH_CONFIGS}
+
+    cp $SSH_DIR/config ${SSH_CONFIGS}
+
+    fin
+}
+
+function save_git_config() {
+    shout "Storing git configuration files"
+
+    dir_check ${GIT_CONFIGS}
+
+    cp $HOME/.gitconfig ${GIT_CONFIGS}/.gitconfig
+    cp $HOME/.gitignore ${GIT_CONFIGS}/.gitignore
+
+    cp -r $HOME/git-hooks ${GIT_CONFIGS}/git-hooks
+
+    fin
+}
+
+function save_zshrc() {
+    shout "Saving .zshrc file"
+
+    cp $HOME/.zshrc ${ZSHRC}
+
+    fin
+}
+
+function save_aliases() {
+    shout "Saving aliases to .alias file"
+
+    alias >> ${ALIASES}
+    sed -i -e 's_.*_alias &_' ${ALIASES}
+    
+    fin
+}
+
+function save_functions() {
+    shout "Saving functions to .functions file"
+
+    functions >> ${FUNCTIONS}
+
+    fin
+}
+
+function save_go_env() {
+    shout "Saving Go env"
+    
+    go env >> ${ENV_FILE_GO}
+
+    fin
+}
