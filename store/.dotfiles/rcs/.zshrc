@@ -6,8 +6,8 @@ source $ENVS
 source $FUNCTIONS 
 source $ENV_FILE_GO
 
-source $ZSH/oh-my-zsh.sh
 plugins=( $(cat $ZSH_PLUGINS) ) 
+source $ZSH/oh-my-zsh.sh
 
 # Go development
 test -d "${GOPATH}" || mkdir "${GOPATH}"
