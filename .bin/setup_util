@@ -2,28 +2,6 @@
 
 . ./util
 
-function copy_files() {
-    read -p "Warning: copying these configuration files will OVERRIDE existing files in your top
-    level directory. Press [ENTER] if you want to proceed, otherwise press [CTL]+[C]."
-
-    shout "Copying git configurations..."
-    cp ${GIT_CONFIGS}/. ${HOME} 
-
-    shout "Copying ssh configurations..."
-    cp ${SSH_CONFIGS}/. ${HOME}/.ssh/ 
-
-    shout "Copying lists..."
-    cp ${LISTS} ${HOME}
-
-    shout "Copying 'sourcables'..." 
-    cp ${SOURCABLES} ${HOME}
-
-    shout "Copying .rc files..."
-    cp ${RCS}/. ${HOME}
-
-    fin
-}
-
 function install_summon() {
     shout "Installing and setting up summon (if not present already)..."
     brew tap cyberark/tools
@@ -121,13 +99,6 @@ function download_git_repos() {
 }
 
 function download_brew_packages() {
-    # Check for Homebrew,
-    # Install if we don't have it
-    if test ! $(which brew); then
-        shout "Installing homebrew..."
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-
     # Update homebrew recipes
     shout "Updating homebrew..."
     brew update
@@ -173,6 +144,4 @@ function setup_py_env() {
     shout "Installing pip and setuptools"
     pip3 install --upgrade setuptools
     pip3 install --upgrade pip
-
-    echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 }

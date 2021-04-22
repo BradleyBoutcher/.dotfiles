@@ -1,0 +1,39 @@
+#!/bin/bash 
+
+# These locations are all relative to the location
+# of $HOME.
+
+# Storage directories 
+PROJECTS="$HOME/projects"
+ZSH="$HOME/.oh-my-zsh"
+
+# Top-level directory prefixes
+CONFIGS="$HOME/.configs"
+
+# git
+GIT_CONFIG="${HOME}/.configs/git"
+GITIGNORE="${HOME}/.gitignore"
+
+# ssh
+SSH_CONFIG="${HOME}/.ssh/config"
+
+# List files
+BREWS="${HOME}/.brews"
+CASKS="${HOME}/.brew_casks"
+ZSH_PLUGINS="${HOME}/.zsh_plugins"
+LOCATIONS="${HOME}/.locations"
+
+# 'Sourcable' files 
+# i.e. environment variables, aliases, functions, etc.
+ALIASES="${HOME}/.aliases"
+ENVS="${HOME}/.env"
+FUNCTIONS="${HOME}/.functions"
+ENV_FILE_GO="${HOME}/.go_env"
+EXPORTS="${HOME}/.exports"
+
+# RC files
+# i.e. .zshrc, .conjurrc, etc.
+ZSHRC="${HOME}/.zshrc"
+CONJURRC="${HOME}/.conjurrc"
+NETRC="${HOME}/.netrc"
+BASH_PROFILE="${HOME}/.bash_profile"

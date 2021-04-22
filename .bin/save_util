@@ -4,9 +4,9 @@ source util
 source .locations 
 
 function save_brew_packages() {
-    shout "Saving Brew packages to '.brew' file"
+    shout "Saving Brew packages to '.brews' file"
 
-    brew list --formula > $LISTS/.brew 
+    brew list --formula > $LISTS/.brews 
 
     fin
 }
@@ -14,7 +14,7 @@ function save_brew_packages() {
 function save_cask_packages() {
     shout "Saving Brew Cask packages to '.brew_cask' file"
 
-    brew list --formula > $LISTS/.brew_casks
+    brew list --cask > $LISTS/.brew_casks
 
     fin
 }
