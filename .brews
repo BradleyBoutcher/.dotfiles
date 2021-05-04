@@ -42,6 +42,7 @@ gnutls
 go
 gobject-introspection
 goreleaser
+gpg
 graphite2
 graphviz
 groovy

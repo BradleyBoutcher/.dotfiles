@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/zsh 
 
 # These locations are all relative to the location
 # of $HOME.
@@ -21,6 +21,7 @@ SSH_CONFIG="${HOME}/.ssh/config"
 BREWS="${HOME}/.brews"
 CASKS="${HOME}/.brew_casks"
 ZSH_PLUGINS="${HOME}/.zsh_plugins"
+ANTIGEN_PLUGINS="${HOME}/.antigen_plugins"
 LOCATIONS="${HOME}/.locations"
 
 # 'Sourcable' files 
@@ -30,6 +31,7 @@ ENVS="${HOME}/.env"
 FUNCTIONS="${HOME}/.functions"
 ENV_FILE_GO="${HOME}/.go_env"
 EXPORTS="${HOME}/.exports"
+ANTIGEN="${HOME}/.antigen_setup"
 
 # RC files
 # i.e. .zshrc, .conjurrc, etc.

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./util
+. ./.bin/util
 
 function install_summon() {
     shout "Installing and setting up summon (if not present already)..."
@@ -52,12 +52,14 @@ function install_docker() {
 }
 
 function install_git() {
+    SSH_DIR=".ssh"
+
     shout "Installing Git (if not present already)..."
     brew list git || brew install git
 
     shout "Creating an SSH key for you..."
     # Create ssh dir if it doesn't already exist
-    check_dir "$HOME/$SSH_DIR"
+    dir_check "$HOME/$SSH_DIR"
     # Generate key
     ssh-keygen -t rsa -C "btboutcher@icloud.com" -f "$HOME/$SSH_DIR/id_rsa"
 
@@ -82,7 +84,7 @@ function install_git() {
 
 function download_git_repos() {
     shout "Downloading Github repos (this may take a while)..."
-    check_dir "$PROJECTS"
+    dir_check "$PROJECTS"
 
     brew list jq || brew install jq
 

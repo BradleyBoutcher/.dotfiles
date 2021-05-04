@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+source $HOME/.antigen.zsh
+
+antigen use oh-my-zsh
+antigen theme alanpeabody
+
+while read p; do
+  antigen bundle $p
+done < $ANTIGEN_PLUGINS
+
+antigen apply

@@ -1,39 +1,36 @@
 #!/bin/bash 
 
-. ./.bin/setup-util
-. ./.bin/set_mac_settings
+. ./.bin/setup_util
+. ./.bin/util
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Update software 
-    softwareupdate --all --install --force
+# if [[ "$OSTYPE" == "darwin"* ]]; then
+#     # Install XCode Utils
+#     shout "Installing xcode utilities"
+#     sudo xcode-select --install
 
-    # Install XCode Utils
-    shout "Installing xcode utilities"
-    sudo xcode-select --install
+#     shout "Setting Mac Settings"
+#     ./.macos
 
-    shout "Setting Mac Settings"
-    ./.macos
-fi
+#	  shout "Downloading Antigen"
+#	  curl -L git.io/antigen > $HOME/.antigen.zsh
+# fi
 
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# # Install Homebrew
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-read -p "Press [Enter] key after verifying `brew doctor` works in another terminal..."
+# read -p "Press [Enter] key after verifying `brew doctor` works in another terminal..."
 
-shout "Installing utilities"
-install_oh_my_zsh
-install_git
-install_docker
-download_brew_packages
-setup_py_env
-install_ruby
+# shout "Installing utilities"
+# install_oh_my_zsh
+# install_git
+# install_docker
 
 function doIt() {
 	rsync --exclude ".git/" \
 		--exclude ".DS_Store" \
 		--exclude "bootstrap.sh" \
 		--exclude "bin/" \
-		-avh --no-perms . ~;
+		-avh --no-perms . $HOME;
 	source ~/.zshrc;
 }
 

@@ -1,4 +1,17 @@
-#!/usr/bin/env bash
+#!/bin/zsh
+
+## GLOBAL
+PATH="/usr/local/bin:$PATH"
+PATH="$PATH:$GOPATH/bin"
+
+CONJUR_MAJOR_VERSION=4
+GPG_TTY=$(tty)
+
+## BREW 
+PATH="/usr/local/sbin:$PATH"
+
+## ZSH
+COMPLETION_WAITING_DOTS="true" 
 
 # Make nano the default editor.
 export EDITOR='nano';
@@ -35,3 +48,18 @@ export GPG_TTY=$(tty);
 
 # Hide the "default interactive shell is now zsh" warning on macOS.
 export BASH_SILENCE_DEPRECATION_WARNING=1;
+ 
+## GOLANG
+# GOPATH="${HOME}/.go"
+# GOROOT="$(brew --prefix golang)/libexec"
+# export PATH="$PATH:$(go env GOPATH)/bin"
+
+# ## Python
+# export PATH="$HOME/.poetry/bin:$PATH"
+# export PATH="/usr/local/opt/python@3.9/libexec/bin:$PATH"
+
+# ## RUBY
+# # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# export PATH="$HOME/.rvm/bin:$PATH"
+# # Load RVM into a shell session *as a function*
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

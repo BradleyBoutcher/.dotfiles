@@ -1,16 +1,10 @@
 source $HOME/.locations 
+source $HOME/.antigen.zsh
 
-# Source all the files 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{$ALIASES,$ENVS,$EXPORTS,$FUNCTIONS,$ENV_FILE_GO}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
-
-plugins=( $(cat $ZSH_PLUGINS) ) 
 source $ZSH/oh-my-zsh.sh
+source $ANTIGEN
+source $ALIASES
+source $FUNCTIONS
 
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null; then
@@ -18,20 +12,17 @@ if type _git &> /dev/null; then
 fi;
 
 # Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob;
+setopt nocaseglob;
 
 # Append to the Bash history file, rather than overwriting it
-shopt -s histappend;
-
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell;
+setopt histappend;
 
 # Go development
-test -d "${GOPATH}" || mkdir "${GOPATH}"
-test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+# test -d "${GOPATH}" || mkdir "${GOPATH}"
+# test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
-# Ruby
-eval "$(rbenv init -)"
+# # Ruby
+# eval "$(rbenv init -)"
 
-# Python
-eval "$(pyenv init -)"
+# # Python
+# eval "$(pyenv init -)"

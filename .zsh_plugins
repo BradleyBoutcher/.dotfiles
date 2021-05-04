@@ -1,11 +1,10 @@
 docker 
-git 
-ruby 
-osx 
-node 
-golang 
-history 
+git
 zsh-syntax-highlighting 
 zsh-autosuggestions 
 zsh-completions 
 zsh-history-substring-search
+zsh-navigation-tools
+osx 
+node 
+history 
