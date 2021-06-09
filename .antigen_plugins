@@ -1,9 +1,10 @@
-docker 
+osx 
+npm
+history
+lukechilds/zsh-nvm
+mroth/evalcache 
 zsh-users/zsh-syntax-highlighting 
 zsh-users/zsh-autosuggestions 
 zsh-users/zsh-completions 
 zsh-users/zsh-history-substring-search
 psprint/zsh-navigation-tools
-osx 
-node 
-history 

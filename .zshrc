@@ -1,8 +1,11 @@
 source $HOME/.locations 
-source $HOME/.antigen.zsh
 
-source $ZSH/oh-my-zsh.sh
+export NVM_LAZY_LOAD=true
+source $HOME/.antigen.zsh
 source $ANTIGEN
+# zmodload zsh/zprof
+
+source $EXPORTS
 source $ALIASES
 source $FUNCTIONS
 
@@ -17,12 +20,12 @@ setopt nocaseglob;
 # Append to the Bash history file, rather than overwriting it
 setopt histappend;
 
-# Go development
+# Go
 # test -d "${GOPATH}" || mkdir "${GOPATH}"
 # test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
-# # Ruby
-# eval "$(rbenv init -)"
+# Ruby
+_evalcache rbenv init -
 
-# # Python
-# eval "$(pyenv init -)"
+# Python
+_evalcache pyenv init -
