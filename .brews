@@ -106,7 +106,6 @@ perl
 pinentry
 pixman
 pkg-config
-postgresql
 pyenv
 python@3.7
 python@3.8

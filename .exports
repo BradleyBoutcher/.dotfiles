@@ -11,6 +11,9 @@ export PATH="/usr/local/sbin:$PATH"
 export COMPLETION_WAITING_DOTS="true" 
 export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 
+## Docker
+export PATH="~/.rd/bin:$PATH"
+
 # Make nano the default editor.
 export EDITOR='nano';
 
@@ -45,7 +48,7 @@ export GPG_TTY=$(tty);
 
 # Hide the "default interactive shell is now zsh" warning on macOS.
 export BASH_SILENCE_DEPRECATION_WARNING=1;
- 
+
 ## GOLANG
 # GOPATH="${HOME}/.go"
 # GOROOT="$(brew --prefix golang)/libexec"

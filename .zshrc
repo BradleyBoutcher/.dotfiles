@@ -25,7 +25,7 @@ setopt histappend;
 # test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
 # Ruby
-_evalcache rbenv init -
+# _evalcache rbenv init -
 
 # Python
-_evalcache pyenv init -
+# _evalcache pyenv init -
